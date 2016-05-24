@@ -16,6 +16,7 @@ Is a interface for FLUKA [flair].
 To install the stable version of flair (with the geoviewer module) type:
 brew install flair-geoviewer
 if you want to install the HEAD version you have to manually install the two packages:
+
 brew install --HEAD flair
 
 brew install --HEAD flair-geoviewer
