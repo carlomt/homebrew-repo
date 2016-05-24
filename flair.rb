@@ -9,21 +9,33 @@ class Flair < Formula
   # depends_on "cmake" => :build
   depends_on :x11 
   depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
-  depends_on "freetype"
+  depends_on "freetype" => "universal"
   #depends_on "gcc" => :optional
   #depends_on "ghostscript"
   #depends_on "homebrew/x11/gv"
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
-  depends_on "pydicom" => :python  => :optional
+  depends_on "pydicom" => [:python, :optional]
   # depends_on "flair-geoviewer" => :recommended
   
   def install
     ENV.deparallelize  # if your formula fails when building in parallel
-    ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
+    # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
     
-    system "python", *Language::Python.setup_install_args(libexec/"numpy")
+    # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
+    ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
+    %w[pydicom].each do |r|
+      resource(r).stage do
+        system "python", *Language::Python.setup_install_args(libexec/"vendor")
+      end
+    end
+
+    ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
+    system "python", *Language::Python.setup_install_args(libexec)
+
+    bin.install Dir["#{libexec}/bin/*"]
+    bin.env_script_all_files(libexec/"bin", :PYTHONPATH => ENV["PYTHONPATH"])
     
     system "make", "install-bin", "DESTDIR=#{prefix}", "BINDIR=#{prefix}/bin/"
     prefix.install Dir["*"]
@@ -73,5 +85,14 @@ class Flair < Formula
     # end
       
   end
+
+ # def caveats; <<-EOS.undent
+ #    Homebrew writes wrapper scripts that set PYTHONPATH in ansible's
+ #    execution environment, which is inherited by Python scripts invoked
+ #    by ansible. If this causes problems, you can modify your playbooks
+ #    to invoke python with -E, which causes python to ignore PYTHONPATH.
+ #    EOS
+ #  end
+
   
 end
