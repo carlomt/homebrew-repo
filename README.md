@@ -8,6 +8,7 @@ its features, usage and installation instructions are [summarized on its homepag
 This repository is just a collection of formulae I developed to easily install some tools.
 These tools are downloaded directly from the developers websites.
 To use this repository in your brew type:
+
 brew tap carlomt/repo
 
 Flair
