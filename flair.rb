@@ -19,15 +19,21 @@ class Flair < Formula
   depends_on "pydicom" => [:optional, :python]
   # depends_on "flair-geoviewer" => :recommended
   
+  resource "pydicom" do
+    url "https://github.com/darcymason/pydicom/archive/master.zip"
+  end
+
   def install
     ENV.deparallelize  # if your formula fails when building in parallel
     # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
     
     # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
-    ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
-    %w[pydicom].each do |r|
-      resource(r).stage do
-        system "python", *Language::Python.setup_install_args(libexec/"vendor")
+    if build.with? "pydicom"
+      ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
+      %w[pydicom].each do |r|
+        resource(r).stage do
+          system "python", *Language::Python.setup_install_args(libexec/"vendor")
+        end
       end
     end
 
