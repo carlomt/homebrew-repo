@@ -5,6 +5,8 @@ class Flair < Formula
   url "http://www.fluka.org/flair/flair-2.2-1.tgz"
   version "2.2-1"
   sha256  "963d7cb1935bd626767459f5c0765e590653a2d23eea81ff5f9b9aabcc1a1916"
+
+  option "pydicom" => [:optional, :python]
   
   # depends_on "cmake" => :build
   depends_on :x11 
@@ -16,7 +18,7 @@ class Flair < Formula
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
-  depends_on "pydicom" => [:optional, :python]
+
   # depends_on "flair-geoviewer" => :recommended
   
   resource "pydicom" do
