@@ -8,14 +8,9 @@ class Flair < Formula
 
   option "pydicom", "add the pydicom package to brewed python" 
   
-  # depends_on "cmake" => :build
   depends_on :x11 
   depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
   depends_on "freetype" => "universal"
-  #depends_on "gcc" => :optional
-  #depends_on "fortran" => :recommended
-  #depends_on "ghostscript"
-  #depends_on "homebrew/x11/gv"
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
@@ -32,7 +27,6 @@ class Flair < Formula
     
     # # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
     if build.with? "pydicom"
-      puts "Installing pydicom"
       system "pip install pydicom"
     end
     #   ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
