@@ -6,7 +6,7 @@ class Flair < Formula
   version "2.2-1"
   sha256  "963d7cb1935bd626767459f5c0765e590653a2d23eea81ff5f9b9aabcc1a1916"
 
-  option "pydicom", "add the pydicom package to brewed python"
+  # option "pydicom", "add the pydicom package to brewed python"
   
   # depends_on "cmake" => :build
   depends_on :x11 
@@ -19,30 +19,30 @@ class Flair < Formula
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
-  # depends "pydicom" => [:optional, :python]
+  depends "pydicom" => [:optional, :python]
   # depends_on "flair-geoviewer" => :recommended
   
-  resource "pydicom" do
-    url "https://github.com/darcymason/pydicom/archive/master.zip"
-  end
+  # resource "pydicom" do
+  #   url "https://github.com/darcymason/pydicom/archive/master.zip"
+  # end
 
   def install
-    ENV.deparallelize  # if your formula fails when building in parallel
+    # ENV.deparallelize  # if your formula fails when building in parallel
+    # # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
+    
+    # # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
+    # if build.with? "pydicom"
+    #   ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
+    #   system "python", *Language::Python.setup_install_args("pydicom")
+    #   # %w[pydicom].each do |r|
+    #   #   resource(r).stage do
+    #   #     system "python", *Language::Python.setup_install_args(libexec/"vendor")
+    #   #   end
+    #   # end
+    # end
+    
     # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
-    
-    # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
-    if build.with? "pydicom"
-      ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
-      system "python", *Language::Python.setup_install_args(prefix)
-      # %w[pydicom].each do |r|
-      #   resource(r).stage do
-      #     system "python", *Language::Python.setup_install_args(libexec/"vendor")
-      #   end
-      # end
-    end
-    
-    ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
-    system "python", *Language::Python.setup_install_args(libexec)
+    # system "python", *Language::Python.setup_install_args(libexec)
 
     bin.install Dir["#{libexec}/bin/*"]
     bin.env_script_all_files(libexec/"bin", :PYTHONPATH => ENV["PYTHONPATH"])
