@@ -16,7 +16,7 @@ class Flair < Formula
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
-  depends_on "pydicom" => [:python, :optional]
+  depends_on "pydicom" => [:optional, :python]
   # depends_on "flair-geoviewer" => :recommended
   
   def install
