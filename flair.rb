@@ -32,6 +32,7 @@ class Flair < Formula
     
     # # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
     if build.with? "pydicom"
+      puts "Installing pydicom"
       system "pip install pydicom"
     end
     #   ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
