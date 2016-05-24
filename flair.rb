@@ -10,20 +10,20 @@ class Flair < Formula
   depends_on :x11 
   depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
   depends_on "freetype"
-  depends_on "gcc" => :optional
+  #depends_on "gcc" => :optional
   #depends_on "ghostscript"
   #depends_on "homebrew/x11/gv"
-  depends_on "python" => "with-tcl-tk"
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
+  depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
-  # depends_on "pydicom" => :python
+  depends_on "pydicom" => :python  => :optional
   # depends_on "flair-geoviewer" => :recommended
   
   def install
     ENV.deparallelize  # if your formula fails when building in parallel
     ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
     
-    #system "python", *Language::Python.setup_install_args(libexec/"numpy")
+    system "python", *Language::Python.setup_install_args(libexec/"numpy")
     
     system "make", "install-bin", "DESTDIR=#{prefix}", "BINDIR=#{prefix}/bin/"
     prefix.install Dir["*"]
