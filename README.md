@@ -1,7 +1,7 @@
 # homebrew-repo
 
-Homebrew
-========
+## Homebrew
+
 Brew is a package manager for OSX made with simply Ruby scripts
 its features, usage and installation instructions are [summarized on its homepage][brew].
 
@@ -10,8 +10,8 @@ These tools are downloaded directly from the developers websites.
 To use this repository in your brew type:
 `brew tap carlomt/repo`
 
-Flair
-========
+## Flair
+
 Is a interface for FLUKA [flair].
 To install the stable version of flair (with the geoviewer module) type:
 brew install flair-geoviewer
