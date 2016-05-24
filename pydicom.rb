@@ -11,8 +11,9 @@ class Pydicom < Formula
   
   
   def install
-    ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
-    system "python", *Language::Python.setup_install_args(prefix/"source")
+    system "pip install pydicom"
+    # ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
+    # system "python", *Language::Python.setup_install_args(prefix/"source")
   end
 
   test do
