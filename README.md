@@ -7,13 +7,14 @@ its features, usage and installation instructions are [summarized on its homepag
 
 This repository is just a collection of formulae I developed to easily install some tools.
 These tools are downloaded directly from the developers websites.
-To use this repository in your brew type:
+To use this repository type:
 
 `brew tap carlomt/repo`
 
+
 ## Flair
 
-Is a interface for FLUKA [flair].
+Flair is a interface for FLUKA [flair].
 To install the stable version of flair (with the geoviewer module) type:
 brew install flair-geoviewer
 if you want to install the HEAD version you have to manually install the two packages:
@@ -27,6 +28,12 @@ if you want to install the HEAD version you have to manually install the two pac
 `ln -s /usr/local/Cellar/flair-geoviewer/HEAD/usrbin2dvh  /usr/local/Cellar/flair/HEAD/`
 
 `ln -s /usr/local/Cellar/flair-geoviewer/HEAD/fonts  /usr/local/Cellar/flair/HEAD/`
+
+
+## pydicom
+It is still a not working test. Install it with:
+`pip install pydicom`
+or with the option `--pydicom` of the flair formula.
 
 
 [brew]:http://brew.sh
