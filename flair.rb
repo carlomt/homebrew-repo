@@ -6,7 +6,7 @@ class Flair < Formula
   version "2.2-1"
   sha256  "963d7cb1935bd626767459f5c0765e590653a2d23eea81ff5f9b9aabcc1a1916"
 
-  # option "pydicom", "add the pydicom package to brewed python"
+  option "pydicom", "add the pydicom package to brewed python" => :recommended
   
   # depends_on "cmake" => :build
   depends_on :x11 
@@ -19,7 +19,7 @@ class Flair < Formula
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
-  depends "pydicom" => [:recommended, :python]
+  # depends "pydicom" => [:recommended, :python]
   # depends_on "flair-geoviewer" => :recommended
   
   # resource "pydicom" do
@@ -31,7 +31,9 @@ class Flair < Formula
     # # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
     
     # # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
-    # if build.with? "pydicom"
+    if build.with? "pydicom"
+      system "pip install pydicom"
+    end
     #   ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
     #   system "python", *Language::Python.setup_install_args("pydicom")
     #   # %w[pydicom].each do |r|
