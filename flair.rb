@@ -13,7 +13,7 @@ class Flair < Formula
   depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
   depends_on "freetype" => "universal"
   #depends_on "gcc" => :optional
-  depends_on "fortran" => :recommended
+  #depends_on "fortran" => :recommended
   #depends_on "ghostscript"
   #depends_on "homebrew/x11/gv"
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
