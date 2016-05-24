@@ -1,5 +1,5 @@
 class Pydicom < Formula
-  desc "a python package for working with DICOM files"
+  desc "A python package for working with DICOM files"
   homepage "https://github.com/darcymason/pydicom"
   url "https://github.com/darcymason/pydicom/archive/v0.9.9.zip"
   version "0.9.9"
