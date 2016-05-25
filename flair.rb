@@ -11,7 +11,16 @@ class Flair < Formula
   depends_on :x11 
   depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
   # depends_on "freetype" => "universal"
-  depends_on "freetype"
+  # depends_on "libpng" => "universal"
+  depends_on "freetype" #  => "universal"
+  depends_on "gettext"
+  depends_on "glib"
+  depends_on "pixman"
+  depends_on "cairo"
+  depends_on "gobject-introspection"
+  depends_on "icu4c"
+  depends_on "harfbuzz"
+  depends_on "pango"
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
