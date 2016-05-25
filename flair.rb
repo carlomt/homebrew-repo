@@ -7,6 +7,7 @@ class Flair < Formula
   sha256  "963d7cb1935bd626767459f5c0765e590653a2d23eea81ff5f9b9aabcc1a1916"
 
   option "with-pydicom", "add the pydicom package to brewed python" 
+  option "with-Pillow", "add the Pillow package to brewed python" 
   option "with-aquaterm", "add aquaterm to gnuplot"
   
   depends_on :x11
@@ -56,6 +57,10 @@ class Flair < Formula
     
     # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
     # system "python", *Language::Python.setup_install_args(libexec)
+
+    if build.with? "with-Pillow"
+      system "pip install Pillow"
+    end
 
     bin.install Dir["#{libexec}/bin/*"]
     bin.env_script_all_files(libexec/"bin", :PYTHONPATH => ENV["PYTHONPATH"])
