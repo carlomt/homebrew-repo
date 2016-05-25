@@ -10,6 +10,7 @@ class Flair < Formula
   option "with-aquaterm", "add aquaterm to gnuplot"
   
   depends_on :x11
+  depends_on "gettext"
   if build.with? "with-aquaterm"
     depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
   else
@@ -18,7 +19,6 @@ class Flair < Formula
   # depends_on "freetype" => "universal"
   # depends_on "libpng" => "universal"
   depends_on "freetype" #  => "universal"
-  depends_on "gettext"
   depends_on "glib"
   depends_on "pixman"
   depends_on "cairo"
