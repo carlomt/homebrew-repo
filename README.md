@@ -14,7 +14,7 @@ To use this repository type:
 
 ## Flair
 
-[Flair][flair] is an interface for FLUKA.
+[Flair] is an interface for [FLUKA].
 To install the stable version of flair (with the geoviewer module) type:
 brew install flair-geoviewer
 if you want to install the HEAD version you have to manually install the two packages:
@@ -37,4 +37,5 @@ or with the option `--pydicom` of the flair formula.
 
 
 [brew]:http://brew.sh
-[flair]:http://www.fluka.org/flair/index.html
+[Flair]:http://www.fluka.org/flair/index.html
+[FLUKA]:http://fluka.org/
