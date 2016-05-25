@@ -6,10 +6,15 @@ class Flair < Formula
   version "2.2-1"
   sha256  "963d7cb1935bd626767459f5c0765e590653a2d23eea81ff5f9b9aabcc1a1916"
 
-  option "pydicom", "add the pydicom package to brewed python" 
+  option "with-pydicom", "add the pydicom package to brewed python" 
+  option "with-aquaterm", "add aquaterm to gnuplot"
   
-  depends_on :x11 
-  depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
+  depends_on :x11
+  if build.with? "with-aquaterm"
+    depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
+  else
+    depends_on "gnuplot" => ["with-wxmac","with-x11"]
+  end
   # depends_on "freetype" => "universal"
   # depends_on "libpng" => "universal"
   depends_on "freetype" #  => "universal"
@@ -36,7 +41,7 @@ class Flair < Formula
     # # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
     
     # # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
-    if build.with? "pydicom"
+    if build.with? "with-pydicom"
       system "pip install pydicom"
     end
     #   ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
