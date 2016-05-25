@@ -11,11 +11,7 @@ class Flair < Formula
   
   depends_on :x11
   depends_on "gettext"
-  if build.with? "with-aquaterm"
-    depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
-  else
-    depends_on "gnuplot" => ["with-wxmac","with-x11"]
-  end
+  depends_on "libffi"
   # depends_on "freetype" => "universal"
   # depends_on "libpng" => "universal"
   depends_on "freetype" #  => "universal"
@@ -26,6 +22,11 @@ class Flair < Formula
   depends_on "icu4c"
   depends_on "harfbuzz"
   depends_on "pango"
+  if build.with? "with-aquaterm"
+    depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
+  else
+    depends_on "gnuplot" => ["with-wxmac","with-x11"]
+  end
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
