@@ -9,7 +9,8 @@ class Flair < Formula
   option "with-pydicom", "add the pydicom package to brewed python" 
   option "with-Pillow", "add the Pillow package to brewed python" 
   option "with-aquaterm", "add aquaterm to gnuplot"
-  
+  option "with-wxmac", "add wxmac to gnuplot"
+
   depends_on :x11
   # depends_on "gettext"
   # depends_on "libffi"
@@ -21,11 +22,15 @@ class Flair < Formula
   # depends_on "icu4c"
   # depends_on "harfbuzz"
   # depends_on "pango"
-  # if build.with? "with-aquaterm"
-  #   depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
-  # else
-  #   depends_on "gnuplot" => ["with-wxmac","with-x11"]
-  # end
+  if build.with? "with-aquaterm" and build.with? "with-wxmac"
+    depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
+  elsif build.with? "with-wxmac"
+    depends_on "gnuplot" => ["with-wxmac","with-x11"]
+  elsif build.with? "with-aquaterm"
+    depends_on "gnuplot" => ["with-x11","with-aquaterm"]
+  elsif
+    depends_on "gnuplot" => "with-x11"
+  end
   depends_on "gnuplot"
   depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
