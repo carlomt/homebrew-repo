@@ -16,7 +16,8 @@ class FlairGeoviewer < Formula
   end
   
   def post_install
-    destdir = Formula["flair"].prefix
+#    destdir = Formula["flair"].prefix
+    destdir = "/usr/local/lib/"
     
     # if build.with? "HEAD"
     #   destdir = "#{destdir}/../HEAD"
