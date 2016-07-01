@@ -86,9 +86,11 @@ class Flair < Formula
         # Date:	13-Jun-2006
         #
         # brewed version
+        # Adapted by:   Carlo.Mancini.Terracciano@roma1.infn.it
+        # Date:	1-Jul-2016
 
 
-        DIR="/usr/local/Cellar/flair/2.2-1"
+        DIR="/usr/local/Cellar/flair/#{version}"
         PYTHONPATH=${DIR}/lib
         export PYTHONPATH
         if [ .$PYTHON = . ]; then
