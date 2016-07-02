@@ -6,7 +6,7 @@ class FlairGeoviewer < Formula
   version "2.2-1"
   sha256 "bf55f38e9ce088b2342a246c22d158f99bc1e21a008f31ee5e964bc54a697d3c"
   
-  depends_on "flair"
+  # depends_on "flair"
 
   def install
     ENV.deparallelize  # if your formula fails when building in parallel
