@@ -16,21 +16,21 @@ class FlairGeoviewer < Formula
   end
   
   def post_install
-#    destdir = Formula["flair"].prefix
-    destdir = "/usr/local/lib/"
+    destdir = Formula["flair"].prefix
+    # destdir = "/usr/local/lib/"
     
     # if build.with? "HEAD"
     #   destdir = "#{destdir}/../HEAD"
     #   system "echo #{destdir}"
     # end
     
-    # ln_s prefix/"geoviewer.so", destdir
-    # ln_s prefix/"usrbin2dvh", destdir
-    # ln_s prefix/"fonts", destdir
+    ln_s prefix/"geoviewer.so", destdir
+    ln_s prefix/"usrbin2dvh", destdir
+    ln_s prefix/"fonts", destdir
 
-    bin.install_symlink "geoviewer.so"
-    bin.install_symlink "usrbin2dvh"
-    bin.install_symlink "fonts"
+    # bin.install_symlink "geoviewer.so"
+    # bin.install_symlink "usrbin2dvh"
+    # bin.install_symlink "fonts"
   end
   
 end
