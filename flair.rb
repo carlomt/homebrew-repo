@@ -116,9 +116,9 @@ class Flair < Formula
     # geoviewerdir = Formula["flair-geoviewer"].prefix
     geoviewerdir = "/usr/local/lib"
     
-    ln_s geoviewerdir/"geoviewer.so", prefix
-    ln_s geoviewerdir/"usrbin2dvh", prefix
-    ln_s geoviewerdir/"fonts", prefix
+    ln_s geoviewerdir"/geoviewer.so", prefix
+    ln_s geoviewerdir"/usrbin2dvh", prefix
+    ln_s geoviewerdir"/fonts", prefix
     
     # end
       
