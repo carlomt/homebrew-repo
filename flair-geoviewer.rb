@@ -24,9 +24,13 @@ class FlairGeoviewer < Formula
     #   system "echo #{destdir}"
     # end
     
-    ln_s prefix/"geoviewer.so", destdir
-    ln_s prefix/"usrbin2dvh", destdir
-    ln_s prefix/"fonts", destdir
+    # ln_s prefix/"geoviewer.so", destdir
+    # ln_s prefix/"usrbin2dvh", destdir
+    # ln_s prefix/"fonts", destdir
+
+    bin.install_symlink "geoviewer.so"
+    bin.install_symlink "usrbin2dvh"
+    bin.install_symlink "fonts"
   end
   
 end
