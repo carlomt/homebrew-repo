@@ -89,8 +89,10 @@ class Flair < Formula
         # Adapted by:   Carlo.Mancini.Terracciano@roma1.infn.it
         # Date:	1-Jul-2016
 
-
-        DIR="/usr/local/Cellar/flair/#{version}"
+      EOS
+    line = "DIR=\"#{prefix}/\" \n"
+    target.write(line)
+    target.write <<-EOS.undent
         PYTHONPATH=${DIR}/lib
         export PYTHONPATH
         if [ .$PYTHON = . ]; then
@@ -101,26 +103,27 @@ class Flair < Formula
       EOS
 
   end
-
+  
   def post_install
     
     # bin.install_symlink "#{prefix}/bin/flair"
     # bin.install_symlink "#{prefix}/fless"
     # bin.install_symlink "#{prefix}/fm"
     #    bin.install bin/"flair"
-
+    
     # if build.with? "flair-geoviewer"
-
-    #   geoviewerdir = Formula["flair-geoviewer"].prefix
-      
-    #   ln_s geoviewerdir/"geoviewer.so", prefix
-    #   ln_s geoviewerdir/"usrbin2dvh", prefix
-    #   ln_s geoviewerdir/"fonts", prefix
-
+    
+    # geoviewerdir = Formula["flair-geoviewer"].prefix
+    geoviewerdir = "/usr/local/lib"
+    
+    ln_s geoviewerdir/"geoviewer.so", prefix
+    ln_s geoviewerdir/"usrbin2dvh", prefix
+    ln_s geoviewerdir/"fonts", prefix
+    
     # end
       
   end
-
+  
  # def caveats; <<-EOS.undent
  #    Homebrew writes wrapper scripts that set PYTHONPATH in ansible's
  #    execution environment, which is inherited by Python scripts invoked
