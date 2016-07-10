@@ -1,22 +1,37 @@
-class Root < Formula
+class Root6 < Formula
+  # in order to update, simply change version number and update sha256
+  version_number = "6.06.06"
   desc "Object oriented framework for large scale data analysis"
-  homepage "http://root.cern.ch"
-  version "6.06.06"
-  url "https://root.cern.ch/download/root_v#{version}.source.tar.gz"
-  sha256 "fc868e5f4905544c3f392cc9e895ef5571a08e48682e7fe173bd44c0ba0c7dcd"
-  head "https://github.com/root-mirror/root.git", :branch => "v6-06-06-patches"
+  homepage "https://root.cern.ch"
+  url "https://root.cern.ch/download/root_v#{version_number}.source.tar.gz"
+  mirror "https://fossies.org/linux/misc/root_v#{version_number}.source.tar.gz"
+  version version_number
+  sha256 "0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b"
+  head "http://root.cern.ch/git/root.git"
 
+  bottle do
+    sha256 "d13b1010cd307ea8e6d0277e7053a0996946e76735688b283e7ed9ce55ead1cc" => :el_capitan
+    sha256 "07e037676b6942d1359bdebb3d6d21da5bd025ac20cec7419fa36d915c488c15" => :yosemite
+    sha256 "10c2a95b7e3122f86517f8928f50dc0cf602eff8d22f2dd68ea75c631000fc0b" => :mavericks
   end
 
-  option "with-qt", "Build with Qt graphics backend and GSI's Qt integration"
-
-  depends_on "openssl"
-  depends_on "xrootd" => :recommended
+  depends_on "gcc"
+  depends_on "cmake" => :build
+  depends_on "xrootd" => :optional
+  depends_on "openssl" => :recommended # use homebrew's openssl
+  depends_on :python => :recommended # make sure we install pyroot
+  depends_on :x11 => :recommended if OS.linux?
   depends_on "gsl" => :recommended
-  depends_on "fftw" => :optional
-  depends_on "qt" => [:optional, "with-qt3support"]
-  depends_on :x11 => :optional
-  depends_on :python if MacOS.version <= :snow_leopard
+  depends_on "gdml" => :recommended
+  depends_on "geocad" => :recommended
+  # root5 obviously conflicts, simply need `brew unlink root`
+  conflicts_with "root"
+  # cling also takes advantage
+  needs :cxx11
+
+  def config_opt(opt, pkg = opt)
+    "-D#{opt}=#{(build.with? pkg) ? "ON" : "OFF"}"
+  end
 
   def install
     # brew audit doesn't like non-executables in bin
@@ -27,62 +42,42 @@ class Root < Formula
                   "man/man1/setup-pq2.1", "README/INSTALL", "README/README"],
       /bin.thisroot/, "libexec/thisroot"
 
-    # N.B. that it is absolutely essential to specify
-    # the --etcdir flag to the configure script.  This is
-    # due to a long-known issue with ROOT where it will
-    # not display any graphical components if the directory
-    # is not specified:
-    # http://root.cern.ch/phpBB3/viewtopic.php?f=3&t=15072
+    # ROOT does the following things by default that `brew audit` doesn't like:
+    #  1. Installs libraries to lib/
+    #  2. Installs documentation to man/
+    # Homebrew expects:
+    #  1. Libraries in lib/<some_folder>
+    #  2. Documentation in share/man
+    # so we set some flags to match what Homebrew expects
     args = %W[
-      --all
-      --enable-builtin-glew
-      --enable-builtin-freetype
-      --disable-ruby
-      --prefix=#{prefix}
-      --etcdir=#{prefix}/etc/root
-      --mandir=#{man}
-      --elispdir=#{share}/emacs/site-lisp/#{name}
+      -Dgnuinstall=ON
+      -DCMAKE_INSTALL_ELISPDIR=#{share}/emacs/site-lisp/#{name}
+      -Dbuiltin_freetype=ON
+      -Droofit=ON
+      -Dminuit2=ON
+      -Dcocoa=ON
+      -Dlibcxx=ON
+      #{config_opt("python")}
+      #{config_opt("ssl", "openssl")}
+      #{config_opt("xrootd")}
+      #{config_opt("mathmore", "gsl")}
     ]
 
-    args << "--enable-mathmore" if build.with? "gsl"
-
-    if build.with? "x11"
-      args << "--disable-cocoa"
-      args << "--enable-x11"
-    end
-
-    if build.with? "qt"
-      args << "--enable-qt"
-      args << "--enable-qtgsi"
-      args << "--with-qt-libdir=#{Formula["qt"].opt_lib}"
-      args << "--with-qt-incdir=#{Formula["qt"].opt_include}"
-    end
-
-    args << "--enable-cxx11"
-
     if build.with? "gdml"
-      args << "--enable-gdml"
+      args << "-Dgdml=ON"
     end
 
     if build.with? "geocad"
-      args << "--enable-geocad"
+      args <<  "-Dgeocad=ON"
     end
 
-    if build.with? "minuit2"
-      args << "--enable-minuit2"
+
+    # ROOT forbids running CMake in the root of the source directory,
+    # so run in a subdirectory (there's already one called `build`)
+    mkdir "build_dir" do
+      system "cmake", "..", *(std_cmake_args + args)
+      system "make", "install"
     end
-
-    if build.with? "roofit"
-      args << "--enable-roofit"
-    end
-
-    system "./configure", *args
-
-    system "make"
-    system "make", "install"
-
-    # needed to run test suite
-    prefix.install "test"
 
     libexec.mkpath
     mv Dir["#{bin}/*.*sh"], libexec
@@ -96,11 +91,11 @@ class Root < Formula
     before using ROOT.
 
     For bash users:
-      . $(brew --prefix root)/libexec/thisroot.sh
+      . $(brew --prefix root6)/libexec/thisroot.sh
     For zsh users:
-      pushd $(brew --prefix root) >/dev/null; . libexec/thisroot.sh; popd >/dev/null
+      pushd $(brew --prefix root6) >/dev/null; . libexec/thisroot.sh; popd >/dev/null
     For csh/tcsh users:
-      source `brew --prefix root`/libexec/thisroot.csh
+      source `brew --prefix root6`/libexec/thisroot.csh
     EOS
   end
 
