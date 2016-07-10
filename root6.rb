@@ -18,7 +18,7 @@ class Root6 < Formula
   option "with-gdml", "add gdml"
   option "with-geocad", "add geocad"
   
-  depends_on "gcc" ==> "with-all-languages"
+  depends_on "gcc" => "with-all-languages"
   depends_on "cmake" => :build
   depends_on "xrootd" => :optional
   depends_on "openssl" => :recommended # use homebrew's openssl
