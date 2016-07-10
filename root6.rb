@@ -15,8 +15,8 @@ class Root6 < Formula
     sha256 "10c2a95b7e3122f86517f8928f50dc0cf602eff8d22f2dd68ea75c631000fc0b" => :mavericks
   end
 
-  option "with-gdml", "add gdml"
-  option "with-geocad", "add geocad"
+  option "with-gdml", "Build with gdml support"
+  option "with-geocad", "Build with geocad support"
   
   depends_on "gcc" => "with-all-languages"
   depends_on "cmake" => :build
@@ -92,11 +92,11 @@ class Root6 < Formula
     before using ROOT.
 
     For bash users:
-      . $(brew --prefix root6)/libexec/thisroot.sh
+      . $(brew --prefix carlomt/repo/root6)/libexec/thisroot.sh
     For zsh users:
-      pushd $(brew --prefix root6) >/dev/null; . libexec/thisroot.sh; popd >/dev/null
+      pushd $(brew --prefix carlomt/repo/root6) >/dev/null; . libexec/thisroot.sh; popd >/dev/null
     For csh/tcsh users:
-      source `brew --prefix root6`/libexec/thisroot.csh
+      source `brew --prefix carlomt/repo/root6`/libexec/thisroot.csh
     EOS
   end
 
