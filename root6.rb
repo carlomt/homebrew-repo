@@ -15,15 +15,16 @@ class Root6 < Formula
     sha256 "10c2a95b7e3122f86517f8928f50dc0cf602eff8d22f2dd68ea75c631000fc0b" => :mavericks
   end
 
-  depends_on "gcc"
+  option "with-gdml", "add gdml"
+  option "with-geocad", "add geocad"
+  
+  depends_on "gcc" ==> "with-all-languages"
   depends_on "cmake" => :build
   depends_on "xrootd" => :optional
   depends_on "openssl" => :recommended # use homebrew's openssl
   depends_on :python => :recommended # make sure we install pyroot
   depends_on :x11 => :recommended if OS.linux?
   depends_on "gsl" => :recommended
-  depends_on "gdml" => :recommended
-  depends_on "geocad" => :recommended
   # root5 obviously conflicts, simply need `brew unlink root`
   conflicts_with "root"
   # cling also takes advantage
