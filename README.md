@@ -18,8 +18,11 @@ To use this repository type:
 To install the minimal stable version of flair (with the geoviewer module) type:
 `brew install flair-geoviewer`
 my suggestion is to install flair and gnuplot in this way:
+
 `brew install gnuplot --with-aquaterm --with-qt --with-tex --with-wxmac --with-x11`
+
 `brew install flair --with-pydicom --with-wxmac --with-aquaterm --with-Pillow`
+
 `brew install flair-geoviewer` 
 
 if you want to install the HEAD version you have to manually install the two packages:
