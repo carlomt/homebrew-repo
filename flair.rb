@@ -5,23 +5,13 @@ class Flair < Formula
   url "http://www.fluka.org/flair/flair-2.2-1.tgz"
   version "2.2-1"
   sha256  "963d7cb1935bd626767459f5c0765e590653a2d23eea81ff5f9b9aabcc1a1916"
+  url "http://www.fluka.org/flair/flair-2.3-0.tgz"
+  version "2.3-0"
+  sha256 "ea39f49f7e63ee4739f284be35c28777e0cd7f5c4a0408d96ec9ca9d55e22be9"
 
-  option "with-pydicom", "add the pydicom package to brewed python" 
-  option "with-Pillow", "add the Pillow package to brewed python" 
-  option "with-aquaterm", "add aquaterm to gnuplot"
-  option "with-wxmac", "add wxmac to gnuplot"
-
-  depends_on :x11
-  # depends_on "gettext"
-  # depends_on "libffi"
+  # depends_on "cmake" => :build
+  depends_on :x11    
   depends_on "freetype"
-  # depends_on "glib"
-  # depends_on "pixman"
-  # depends_on "cairo"
-  # depends_on "gobject-introspection"
-  # depends_on "icu4c"
-  # depends_on "harfbuzz"
-  # depends_on "pango"
   if build.with? "with-aquaterm" and build.with? "with-wxmac"
     depends_on "gnuplot" => ["with-wxmac","with-x11","with-aquaterm"]
   elsif build.with? "with-wxmac"
@@ -32,36 +22,17 @@ class Flair < Formula
     depends_on "gnuplot" => "with-x11"
   end
   depends_on "gnuplot"
-  depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
+  depends_on "tcl-tk"
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
-  # depends "pydicom" => [:recommended, :python]
-  # depends_on "flair-geoviewer" => :recommended
-  
-  # resource "pydicom" do
-  #   url "https://github.com/darcymason/pydicom/archive/master.zip"
-  # end
 
   def install
     # ENV.deparallelize  # if your formula fails when building in parallel
-    # # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
-    
-    # # system "python", *Language::Python.setup_install_args(libexec/"pydicom")
+
     if build.with? "with-pydicom"
       system "pip install numpy"
       system "pip install pydicom"
     end
-    #   ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python2.7/site-packages"
-    #   system "python", *Language::Python.setup_install_args("pydicom")
-    #   # %w[pydicom].each do |r|
-    #   #   resource(r).stage do
-    #   #     system "python", *Language::Python.setup_install_args(libexec/"vendor")
-    #   #   end
-    #   # end
-    # end
-    
-    # ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python2.7/site-packages"
-    # system "python", *Language::Python.setup_install_args(libexec)
 
     if build.with? "with-Pillow"
       system "pip install Pillow"
