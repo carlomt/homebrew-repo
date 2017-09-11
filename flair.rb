@@ -2,9 +2,9 @@ class Flair < Formula
   desc "Flair - FLUKA Advanced Interface"
   homepage "http://www.fluka.org/flair/"
   head "http://svn.cern.ch/guest/flair/tags/release/flair", :using => :svn
-  url "http://www.fluka.org/flair/flair-2.2-1.tgz"
-  version "2.2-1"
-  sha256  "963d7cb1935bd626767459f5c0765e590653a2d23eea81ff5f9b9aabcc1a1916"
+  # url "http://www.fluka.org/flair/flair-2.2-1.tgz"
+  # version "2.2-1"
+  # sha256  "963d7cb1935bd626767459f5c0765e590653a2d23eea81ff5f9b9aabcc1a1916"
   url "http://www.fluka.org/flair/flair-2.3-0.tgz"
   version "2.3-0"
   sha256 "ea39f49f7e63ee4739f284be35c28777e0cd7f5c4a0408d96ec9ca9d55e22be9"
