@@ -9,6 +9,11 @@ class Flair < Formula
   version "2.3-0"
   sha256 "ea39f49f7e63ee4739f284be35c28777e0cd7f5c4a0408d96ec9ca9d55e22be9"
 
+  option "with-pydicom", "add the pydicom package to brewed python" 
+  option "with-Pillow", "add the Pillow package to brewed python" 
+  option "with-aquaterm", "add aquaterm to gnuplot"
+  option "with-wxmac", "add wxmac to gnuplot"
+  
   # depends_on "cmake" => :build
   depends_on :x11    
   depends_on "freetype"
