@@ -52,7 +52,6 @@ class TclTk < Formula
       --mandir=#{man}
       --enable-threads
       --enable-64bit
-      --with-x
     ]
 
     cd "unix" do
@@ -68,8 +67,8 @@ class TclTk < Formula
 
       resource("tk").stage do
         cd "unix" do
-          system "./configure", *args, "--enable-aqua=yes",
-                                "--without-x", "--with-tcl=#{lib}"
+          system "./configure", *args, 
+                                "--with-x", "--with-tcl=#{lib}"
           system "make"
           system "make", "install"
           system "make", "install-private-headers"
