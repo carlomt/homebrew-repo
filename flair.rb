@@ -27,8 +27,8 @@ class Flair < Formula
     depends_on "gnuplot" => "with-x11"
   end
   depends_on "gnuplot"
-  # depends_on "tcl-tk"
-  depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
+  depends_on "carlomt/repo/tcl-tk"
+  # depends_on "homebrew/dupes/tcl-tk" => ["with-threads", "with-x11"]
   depends_on "python" => "with-tcl-tk"
   depends_on "numpy" => :python
 
