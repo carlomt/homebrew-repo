@@ -45,6 +45,8 @@ class Geant4 < Formula
      system "make", "install" # if this fails, try separate make/make install steps
     end
 
+  end
+   
   def caveats; <<~EOS
     Because many Geant4 models depends on installation-dependent
     environment variables to function properly, you should
@@ -59,7 +61,6 @@ class Geant4 < Formula
     EOS
   end
    
-  end
 
   test do
     # `test do` will create, run in and delete a temporary directory.
