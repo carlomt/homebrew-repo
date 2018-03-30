@@ -55,9 +55,9 @@ class Geant4 < Formula
     before using Geant4.
 
     For bash users:
-      . #{HOMEBREW_PREFIX}/bin/geant4.sh
+      . #{prefix}/bin/geant4.sh
     For csh/tcsh users:
-      source #{HOMEBREW_PREFIX}/bin/geant4.csh
+      source #{prefix}/bin/geant4.csh
     EOS
   end
    
