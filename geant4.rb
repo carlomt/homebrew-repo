@@ -20,7 +20,7 @@ class Geant4 < Formula
     args = std_cmake_args + %W[	
     -DCMAKE_BUILD_TYPE=RelWithDebInfo 
     -DGEANT4_INSTALL_DATA=ON 
-    -DGEANT4_INSTALL_DATADIR=#{prefix}/geant4-data  
+    -DGEANT4_INSTALL_DATADIR=#{prefix}/../geant4-data  
     -DGEANT4_USE_GDML=ON 
     -DGEANT4_USE_QT=ON 
     -DGEANT4_BUILD_CXXSTD=c++11 
@@ -38,6 +38,20 @@ class Geant4 < Formula
      system "make", "install" # if this fails, try separate make/make install steps
     end
 
+  def caveats; <<~EOS
+    Because many Geant4 models depends on installation-dependent
+    environment variables to function properly, you should
+    add the following commands to your shell initialization
+    script (.bashrc/.profile/etc.), or call them directly
+    before using Geant4.
+
+    For bash users:
+      . #{HOMEBREW_PREFIX}/bin/geant4.sh
+    For csh/tcsh users:
+      source #{HOMEBREW_PREFIX}/bin/geant4.csh
+    EOS
+  end
+   
   end
 
   test do
