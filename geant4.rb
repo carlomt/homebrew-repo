@@ -8,7 +8,7 @@ class Geant4 < Formula
   option "with-multithread", "enable the multithread features of Geant4"
   option "with-debinfo", "build type: release with debug info"
   
-  keg_only "no need to create symlinks"
+  # keg_only "no need to create symlinks"
 
   depends_on :xcode => :build
   depends_on "cmake" => :build
@@ -23,7 +23,7 @@ class Geant4 < Formula
 
     args = std_cmake_args + %W[	
     -DGEANT4_INSTALL_DATA=ON 
-    -DGEANT4_INSTALL_DATADIR=#{prefix}/../geant4-data  
+    -DGEANT4_INSTALL_DATADIR=#{share}/geant4-data  
     -DGEANT4_USE_GDML=ON 
     -DGEANT4_USE_QT=ON 
     -DGEANT4_BUILD_CXXSTD=c++11 
@@ -55,9 +55,9 @@ class Geant4 < Formula
     before using Geant4.
 
     For bash users:
-      . #{prefix}/bin/geant4.sh
+      . #{HOMEBREW_PREFIX}/bin/geant4.sh
     For csh/tcsh users:
-      source #{prefix}/bin/geant4.csh
+      source #{HOMEBREW_PREFIX}/bin/geant4.csh
     EOS
   end
    
