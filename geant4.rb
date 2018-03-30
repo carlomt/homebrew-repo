@@ -34,8 +34,8 @@ class Geant4 < Formula
       
    mkdir "builddir" do	
      system "cmake", "..", *args
-
-     system "make", "install" # if this fails, try separate make/make install steps
+     prefix.install Dir["examples/*"]
+     # system "make", "install" # if this fails, try separate make/make install steps
     end
 
   def caveats; <<~EOS
