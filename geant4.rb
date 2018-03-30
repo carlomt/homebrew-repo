@@ -1,12 +1,15 @@
 class Geant4 < Formula
   desc "Toolkit for the simulation of the passage of particles through matter"
-  homepage "http://cern.ch/geant4/"
-  url "http://cern.ch/geant4/support/source/geant4.10.04.p01.tar.gz"
+  homepage "https://cern.ch/geant4/"
+  url "https://cern.ch/geant4/support/source/geant4.10.04.p01.tar.gz"
   version "4.10.04.p01"
   sha256 "a3eb13e4f1217737b842d3869dc5b1fb978f761113e74bd4eaf6017307d234dd"
 
   option "with-multithread", "enable the multithread features of Geant4"
-  
+
+  keg_only "no need to create symlinks"
+
+  depends_on :xcode => :build
   depends_on "cmake" => :build
   depends_on "carlomt/repo/qt@4"
   depends_on "xerces-c"
