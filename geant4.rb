@@ -6,7 +6,8 @@ class Geant4 < Formula
   sha256 "a3eb13e4f1217737b842d3869dc5b1fb978f761113e74bd4eaf6017307d234dd"
 
   option "with-multithread", "enable the multithread features of Geant4"
-
+  option "with-debinfo", "build type: release with debug info"
+  
   keg_only "no need to create symlinks"
 
   depends_on :xcode => :build
@@ -33,7 +34,11 @@ class Geant4 < Formula
     else
       args << "-DGEANT4_BUILD_MULTITHREADED=OFF"
     end
-      
+
+    if build.with? "with-debinfo"
+      args << "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+    end
+    
    mkdir "builddir" do	
      system "cmake", "..", *args
      prefix.install Dir["examples/*"]
