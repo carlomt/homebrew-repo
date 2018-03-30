@@ -18,7 +18,6 @@ class Geant4 < Formula
     # Remove unrecognized options if warned by configure
 
     args = std_cmake_args + %W[	
-    -DCMAKE_BUILD_TYPE=RelWithDebInfo 
     -DGEANT4_INSTALL_DATA=ON 
     -DGEANT4_INSTALL_DATADIR=#{prefix}/../geant4-data  
     -DGEANT4_USE_GDML=ON 
@@ -35,7 +34,7 @@ class Geant4 < Formula
    mkdir "builddir" do	
      system "cmake", "..", *args
      prefix.install Dir["examples/*"]
-     # system "make", "install" # if this fails, try separate make/make install steps
+     system "make", "install" # if this fails, try separate make/make install steps
     end
 
   def caveats; <<~EOS
