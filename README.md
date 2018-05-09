@@ -12,38 +12,6 @@ To use this repository type:
 `brew tap carlomt/repo`
 
 
-## Flair
+To install prerequisites for Geant4:
 
-[Flair] is an interface for [FLUKA].
-To install the minimal stable version of flair (with the geoviewer module) type:
-`brew install flair-geoviewer`
-my suggestion is to install flair and gnuplot in this way:
-
-`brew install gnuplot --with-aquaterm --with-qt --with-tex --with-wxmac --with-x11`
-
-`brew install flair --with-pydicom --with-wxmac --with-aquaterm --with-Pillow`
-
-`brew install flair-geoviewer` 
-
-if you want to install the HEAD version you have to manually install the two packages:
-
-`brew install --HEAD flair`
-
-`brew install --HEAD flair-geoviewer`
-
-`ln -s /usr/local/Cellar/flair-geoviewer/HEAD/geoviewer.so  /usr/local/Cellar/flair/HEAD/`
-
-`ln -s /usr/local/Cellar/flair-geoviewer/HEAD/usrbin2dvh  /usr/local/Cellar/flair/HEAD/`
-
-`ln -s /usr/local/Cellar/flair-geoviewer/HEAD/fonts  /usr/local/Cellar/flair/HEAD/`
-
-
-## pydicom
-It is still a not working test. Install it with:
-`pip install pydicom`
-or with the option `--pydicom` of the flair formula.
-
-
-[brew]:http://brew.sh
-[Flair]:http://www.fluka.org/flair/index.html
-[FLUKA]:http://fluka.org/
+`brew install cmake carlomt/repo/qt@4 xerces-c`
