@@ -92,8 +92,9 @@ class Python < Formula
       --enable-loadable-sqlite-extensions
       --without-ensurepip
       --with-dtrace
-      --with-openssl=#{Formula["openssl"].opt_prefix}
     ]
+    #--with-openssl=#{Formula["openssl"].opt_prefix}
+
 
     args << "--without-gcc" if ENV.compiler == :clang
 
@@ -123,6 +124,12 @@ class Python < Formula
       "do_readline = self.compiler.find_library_file(lib_dirs, 'readline')",
       "do_readline = '#{Formula["readline"].opt_lib}/libhistory.dylib'"
 
+    if build.stable?
+      inreplace "setup.py", "/usr/local/ssl", Formula["openssl"].opt_prefix
+    else
+      args << "--with-openssl=#{Formula["openssl"].opt_prefix}"
+    end
+    
     inreplace "setup.py" do |s|
       s.gsub! "sqlite_setup_debug = False", "sqlite_setup_debug = True"
       s.gsub! "for d_ in inc_dirs + sqlite_inc_paths:",
@@ -137,6 +144,10 @@ class Python < Formula
       f.gsub! "DEFAULT_FRAMEWORK_FALLBACK = [", "DEFAULT_FRAMEWORK_FALLBACK = [ '#{HOMEBREW_PREFIX}/Frameworks',"
     end
 
+    openssl = Formula["openssl"].opt_prefix
+    cppflags << "-I#{openssl}/include"
+    ldflags  << "-L#{openssl}/lib"    
+    
     if build.with? "tcl-tk"
       tcl_tk = Formula["tcl-tk"].opt_prefix
       cppflags << "-I#{tcl_tk}/include"
